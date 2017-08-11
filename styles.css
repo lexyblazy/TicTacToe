@@ -1,0 +1,15 @@
+.container{
+    width:600px;
+    margin:0 auto;
+}
+
+table{
+    width:100%;
+    margin-top: 30%;
+}
+td{
+    height:100px;
+    width:100px;
+    line-height: inherit;
+    font-size:50px;
+}
