@@ -1,4 +1,3 @@
-# This is the freecodecamp wikipedia viewer zipline
+# This is the freecodecamp Tic Tac Toe zipline
 
-# The app is hosted on https://codepen.io/lexyblazy/pen/Gvvgxg
-
+# The app is hosted on https://codepen.io/lexyblazy/full/ZJJJxa
