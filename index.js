@@ -1,6 +1,7 @@
 const boxes = document.querySelectorAll('.boxes');
 const result = document.querySelector('.result');
 var gameIsActive = true;
+var reset = document.querySelector('.btn-primary');
 // o is the first player - 0
 // x is the second player - 1
 var activePlayer = 0;  
@@ -12,6 +13,19 @@ var winningPositions = [
 
 var winningPositionO = [];
 var winningPositionX = [];
+
+reset.addEventListener('click',function(){
+    activePlayer = 0;
+    gameIsActive = true;
+    for(var i = 0; i < gameState.length ; i++){
+        gameState[i] = 2;
+    }
+    boxes.forEach(function(box){
+        box.innerHTML = "";
+    })
+    result.innerHTML = "";
+    reset.innerHTML = 'RESET';
+})
 
 boxes.forEach(function (box) {
  box.addEventListener('click',function(){
@@ -35,18 +49,31 @@ boxes.forEach(function (box) {
         }
          
         winningPositions.forEach(function(pos){
+            
             if(gameState[pos[0]] === gameState[pos[1]]
                && gameState[pos[1]] === gameState[pos[2]]
                && gameState[pos[0]] !== 2){
-                
+                reset.innerHTML='PLAY AGAIN';
                 var winner = gameState[pos[0]];
                 if(winner === 0){
-                    result.innerHTML = 'O WINS';
+                    result.innerHTML = 'O WINS'
                     gameIsActive = false;
                 }else if(winner === 1){
                     result.innerHTML = 'X WINS'
                     gameIsActive = false;
                    
+                }
+                
+            }else{
+                var gameIsOver = true
+                for(var i = 0; i < gameState.length; i++){
+                    if(gameState[i] == 2) gameIsOver = false;
+                    
+                }
+                
+                if(gameIsOver){
+                    result.innerHTML = 'IT\'S A DRAW';
+                    reset.innerHTML = 'PLAY AGAIN'
                 }
                 
             }
