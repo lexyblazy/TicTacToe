@@ -1,5 +1,6 @@
 const boxes = document.querySelectorAll('.boxes');
-
+const result = document.querySelector('.result');
+var gameIsActive = true;
 // o is the first player - 0
 // x is the second player - 1
 var activePlayer = 0;  
@@ -18,28 +19,38 @@ boxes.forEach(function (box) {
      var boxTag = Number(box.getAttribute('name'));
      
      //only allow game to be played in a box when its tag is not yet altered
-     if(gameState[boxTag] === 2 ){ 
+     if(gameIsActive && gameState[boxTag] === 2 ){ 
          
         if(activePlayer === 0){
             
             box.innerHTML = 'O';
             gameState[boxTag] = activePlayer;
-            winningPositionO.push(boxTag);
-            console.log(winningPositionO);
-            winningPositions.forEach(function(pos){
-                
-                console.log(pos);
-            })
             activePlayer = 1;
                          
          }else if(activePlayer === 1){
              
              box.innerHTML = 'X';
              gameState[boxTag] = activePlayer;
-             winningPositionX.push(boxTag);
-             console.log(winningPositionX);
              activePlayer = 0;
         }
+         
+        winningPositions.forEach(function(pos){
+            if(gameState[pos[0]] === gameState[pos[1]]
+               && gameState[pos[1]] === gameState[pos[2]]
+               && gameState[pos[0]] !== 2){
+                
+                var winner = gameState[pos[0]];
+                if(winner === 0){
+                    result.innerHTML = 'O WINS';
+                    gameIsActive = false;
+                }else if(winner === 1){
+                    result.innerHTML = 'X WINS'
+                    gameIsActive = false;
+                   
+                }
+                
+            }
+        })
     }
    
     
